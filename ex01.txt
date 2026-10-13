@@ -1,0 +1,23 @@
+PHẦN 1: PHÂN TÍCH
+
+1. Tại sao lệnh `cat` bị lỗi "command not found" trong môi trường CMD truyền thống?
+- Trong môi trường Windows CMD (Command Prompt) cũ, lệnh `cat` hoàn toàn không phải là lệnh hệ thống hay lệnh nội tại (vì CMD không được tích hợp lệnh này).
+- Khi gõ `cat`, CMD không tìm thấy chương trình thực thi tương ứng trong hệ thống nên báo lỗi "command not found" (không nhận diện được câu lệnh).
+
+2. Tại sao lệnh `cat` lại hoạt động trong PowerShell?
+- Trong PowerShell, lệnh `cat` thực chất là một alias (bí danh) được hệ thống thiết lập sẵn để ánh xạ trực tiếp sang lệnh gốc `Get-Content`.
+- Do đó, khi bạn gõ `cat` trong PowerShell, hệ thống sẽ tự động hiểu và chạy lệnh `Get-Content`, giúp các thao tác đọc tệp tin diễn ra bình thường.
+
+3. Tại sao máy tính bị "Not Responding" (treo cứng) khi mở tệp 800MB bằng Notepad?
+- Notepad là một trình soạn thảo văn bản giao diện đồ họa (GUI) truyền thống hoạt động theo cơ chế tải toàn bộ nội dung tệp từ ổ cứng trực tiếp vào RAM trước khi hiển thị lên màn hình.
+- Khi tệp có dung lượng quá lớn (lên tới 800MB), bộ nhớ RAM phải tiêu thụ dung lượng gấp nhiều lần để giải mã cấu trúc định dạng văn bản thô. Điều này dẫn đến việc cạn kiệt tài nguyên RAM tạm thời, khiến tiến trình bị treo cứng (`Not Responding`) và buộc hệ thống phải đóng hoặc khởi động lại.
+
+
+
+PHẦN 2: HOÀN THIỆN
+
+1. Lệnh PowerShell để xem toàn bộ nội dung tệp (theo từng trang/màn hình để tránh tràn bộ nhớ đệm):
+Get-Content server_log_800MB.log | more
+
+2. Lệnh PowerShell để chỉ xem 10 dòng cuối cùng nhằm kiểm tra lỗi mới nhất:
+Get-Content server_log_800MB.log -Tail 10
